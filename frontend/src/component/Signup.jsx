@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const SignupForm = () => {
     const [formData, setFormData] =useState({
@@ -11,7 +12,7 @@ const SignupForm = () => {
         dob: '',
         gender: ''
     });
-
+    const navigate = useNavigate();
     const [errors, setErrors] =useState({});
 
     const validateForm = () => {
@@ -58,6 +59,9 @@ const SignupForm = () => {
     
                 const result = await response.json();
                 console.log('Server response:', result);
+                if ( result) {
+                    navigate('/signin');
+                }
             } catch (error) {
                 console.error('Error sending data:', error);
             }
